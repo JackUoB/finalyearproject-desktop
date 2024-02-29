@@ -7,7 +7,8 @@
         x:Class="finalyearproject_desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="finalyearproject_desktop">
+        Title="finalyearproject_desktop"
+		MinWidth="600" MinHeight="375">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +16,34 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<!--<stackpanel width="200" margin="16" spacing="10">
+		<textblock text="{binding textblockname}"
+				   horizontalalignment="center"
+				   verticalalignment="center" />
+		<button horizontalalignment="center" command="{binding buttononclickcommand}">click me</button>
+	</stackpanel>-->
 
+	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
+			   OpenPaneLength="175"
+			   CompactPaneLength="64"
+			   DisplayMode="CompactInline"
+			   Background="#ffffff"
+			   PaneBackground="#333333">
+		<SplitView.Pane>
+			<StackPanel Spacing="5" Margin="3">
+				<Button	FontSize="28"
+						Margin="3"
+						Background="#ff8c00"
+						Command="{Binding TriggerPaneCommand}">≡</Button>
+				<ListBoxItem Foreground="#ff8c00">Home</ListBoxItem>
+				<ListBoxItem Foreground="#ff8c00">Page 2</ListBoxItem>
+				<ListBoxItem Foreground="#ff8c00">Page 3</ListBoxItem>
+				<ListBoxItem Foreground="#ff8c00">Page 4</ListBoxItem>
+			</StackPanel>
+		</SplitView.Pane>
+		<SplitView.Content>
+			<TextBox Foreground="#000000">Content</TextBox>
+		</SplitView.Content>
+	</SplitView>
+	
 </Window>

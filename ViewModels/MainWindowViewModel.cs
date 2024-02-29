@@ -1,7 +1,20 @@
-﻿namespace finalyearproject_desktop.ViewModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
+
+namespace finalyearproject_desktop.ViewModels;
+
+public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
-    public class MainWindowViewModel : ViewModelBase
+
+    [ObservableProperty]
+    private bool _isPaneOpen = true;
+
+    [RelayCommand]
+    private void TriggerPane()
     {
-        public string Greeting => "Hello World!";
+        IsPaneOpen = !IsPaneOpen;
     }
+    
+
 }
