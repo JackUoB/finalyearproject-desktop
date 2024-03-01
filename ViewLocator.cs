@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using finalyearproject_desktop.ViewModels;
+using FinalYearProjectDesktop.ViewModels;
 using System;
 
-namespace finalyearproject_desktop
+namespace FinalYearProjectDesktop
 {
     public class ViewLocator : IDataTemplate
     {

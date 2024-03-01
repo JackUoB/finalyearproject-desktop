@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace finalyearproject_desktop
+namespace FinalYearProjectDesktop
 {
     internal class Program
     {

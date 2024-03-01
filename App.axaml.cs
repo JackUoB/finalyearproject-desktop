@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using finalyearproject_desktop.ViewModels;
-using finalyearproject_desktop.Views;
+using FinalYearProjectDesktop.ViewModels;
+using FinalYearProjectDesktop.Views;
 
-namespace finalyearproject_desktop
+namespace FinalYearProjectDesktop
 {
     public partial class App : Application
     {

@@ -1,13 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:finalyearproject_desktop.ViewModels"
+        xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="finalyearproject_desktop.Views.MainWindow"
+        x:Class="FinalYearProjectDesktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="finalyearproject_desktop"
+        Title="FinalYearProjectDesktop"
 		MinWidth="600" MinHeight="375">
 
     <Design.DataContext>
@@ -15,13 +15,6 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-	<!--<stackpanel width="200" margin="16" spacing="10">
-		<textblock text="{binding textblockname}"
-				   horizontalalignment="center"
-				   verticalalignment="center" />
-		<button horizontalalignment="center" command="{binding buttononclickcommand}">click me</button>
-	</stackpanel>-->
 
 	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
 			   OpenPaneLength="175"
@@ -35,14 +28,19 @@
 						Margin="3"
 						Background="#ff8c00"
 						Command="{Binding TriggerPaneCommand}">≡</Button>
-				<ListBoxItem Foreground="#ff8c00">Home</ListBoxItem>
-				<ListBoxItem Foreground="#ff8c00">Page 2</ListBoxItem>
-				<ListBoxItem Foreground="#ff8c00">Page 3</ListBoxItem>
-				<ListBoxItem Foreground="#ff8c00">Page 4</ListBoxItem>
+				<ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedListItem}">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:ListItemTemplate}">
+							<StackPanel Spacing="15" Orientation="Horizontal">
+								<TextBlock Text="{Binding Label}" />
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
 			</StackPanel>
 		</SplitView.Pane>
 		<SplitView.Content>
-			<TextBox Foreground="#000000">Content</TextBox>
+			<TransitioningContentControl Content="{Binding CurrentPage}" />
 		</SplitView.Content>
 	</SplitView>
 	
