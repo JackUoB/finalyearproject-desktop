@@ -16,13 +16,6 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<!--<stackpanel width="200" margin="16" spacing="10">
-		<textblock text="{binding textblockname}"
-				   horizontalalignment="center"
-				   verticalalignment="center" />
-		<button horizontalalignment="center" command="{binding buttononclickcommand}">click me</button>
-	</stackpanel>-->
-
 	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
 			   OpenPaneLength="175"
 			   CompactPaneLength="64"
