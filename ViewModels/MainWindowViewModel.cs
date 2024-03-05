@@ -9,7 +9,7 @@ namespace FinalYearProjectDesktop.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     [ObservableProperty]
-    private bool _isPaneOpen = true;
+    private bool _isPaneOpen = false;
 
     [ObservableProperty]
     private ViewModelBase _currentPage = new HomePageViewModel();
@@ -26,11 +26,12 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         CurrentPage = (ViewModelBase)selected;
     }
 
-    // Dynamic list of all meny options
+    // Dynamic list of all menu options
     public ObservableCollection<ListItemTemplate> Items { get; } = new()
     {
         new ListItemTemplate(typeof(HomePageViewModel)),
         new ListItemTemplate(typeof(FixturesPageViewModel)),
+        new ListItemTemplate(typeof(LeagueTablePageViewModel)),
     };
 
     // Minimises the menu when button is clicked
@@ -49,6 +50,17 @@ public class ListItemTemplate
     {
         ModelType = type;
         Label = type.Name.Replace("PageViewModel", "");
+        
+        // Inserts spaces into any menu options that need it
+        for (int i=0; i<Label.Length; i++)
+        { 
+            string c = Label[i].ToString();
+            if (c.Equals(c.ToUpper()))
+            {
+                Label = Label.Insert(i, " ").Trim();
+                i++;
+            }
+        }
     }
 
     public string Label { get; }
