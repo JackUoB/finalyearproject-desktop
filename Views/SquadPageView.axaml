@@ -1,0 +1,130 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FinalYearProjectDesktop.Views.SquadPageView"
+			 x:DataType="vm:SquadPageViewModel"
+             x:CompileBindings="True">
+
+	<UserControl.Styles>
+		<Styles>
+			<Styles.Resources>
+				<Template x:Key="Shirt">
+					<Path Fill="#ff8c00" Stretch="Uniform" Data="
+          M271.063165,15.7244178 
+          C273.864811,16.960698 277.684595,19.4995861 285.975507,22.3986064 
+          C317.935954,35.6328718 378.489065,50.1924525 403.722945,58.1333266 
+          C434,84.602644 432.319608,149.457313 434,186.509478 
+          C428.951924,194.450352 363.354538,197.097048 354.942578,187.834479 L353.258585,158.718465 
+          C314.56957,268.568534 338.118057,314.891611 344.846425,390.32598 
+          C349.894501,448.558007 82.445279,448.558007 87.4864538,390.32598 
+          C94.2146216,314.887676 119.446901,268.568534 79.0742935,158.718465 L79.0742935,187.834479 
+          C68.9819417,197.099881 3.38065502,194.453343 0.016871175,186.509478 
+          C0.016871175,149.452591 -1.66712124,84.600283 28.6135349,58.1333266 
+          C55.5258061,50.1924525 114.399525,35.6328718 146.360973,22.3986064 
+          C156.952126,18.6954252 157.203248,16.3219462 161.037526,15.7244178 
+          C161.445549,15.660832 201.422045,11.0592343 218.050811,11 
+          C236.90501,10.9379416 268.74876,14.7031426 271.063165,15.7244178 Z "/>
+				</Template>
+			</Styles.Resources>
+			
+			<Style Selector="Border.Rect">
+				<Setter Property="Child" Value="{StaticResource Shirt}"/>
+			</Style>
+			
+		</Styles>
+	</UserControl.Styles>
+	
+	<ScrollViewer>
+		<StackPanel Background="#555555">
+			<TextBlock Margin="10 15" Foreground="White">List of players:</TextBlock>
+			<Grid ColumnDefinitions="*,*,*">
+				<ListBox Grid.Column="0" ItemsSource="{Binding PlayerListColumnA}" Background="#555555">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:Player}">
+							<Grid ColumnDefinitions="*">
+								<WrapPanel ClipToBounds="True" 
+											HorizontalAlignment="Center">
+									<Border Classes="Rect"
+											MaxWidth="200"
+											MaxHeight="250"/>
+								</WrapPanel>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Top"
+										   Padding="25"
+										   FontSize="23"
+										   Text="{Binding ShirtName}"/>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Padding="20"
+										   FontSize="64"
+										   Text="{Binding ShirtNumber}"/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<ListBox Grid.Column="1" ItemsSource="{Binding PlayerListColumnB}" Background="#555555">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:Player}">
+							<Grid ColumnDefinitions="*">
+								<WrapPanel ClipToBounds="True"
+											HorizontalAlignment="Center">
+									<Border Classes="Rect"
+											MaxWidth="200"
+											MaxHeight="250"/>
+								</WrapPanel>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Top"
+										   Padding="25"
+										   FontSize="23"
+										   Text="{Binding ShirtName}"/>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Padding="20"
+										   FontSize="64"
+										   Text="{Binding ShirtNumber}"/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<ListBox Grid.Column="2" ItemsSource="{Binding PlayerListColumnC}" Background="#555555">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type vm:Player}">
+							<Grid ColumnDefinitions="*">
+								<WrapPanel ClipToBounds="True"
+											HorizontalAlignment="Center">
+									<Border Classes="Rect"
+											MaxWidth="200"
+											MaxHeight="250"/>
+								</WrapPanel>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Top"
+										   Padding="25"
+										   FontSize="23"
+										   Text="{Binding ShirtName}"/>
+								<TextBlock Foreground="Black"
+										   HorizontalAlignment="Center"
+										   VerticalAlignment="Center"
+										   Padding="20"
+										   FontSize="64"
+										   Text="{Binding ShirtNumber}"/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Grid>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>
+
+
+

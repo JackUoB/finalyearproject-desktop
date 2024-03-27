@@ -26,10 +26,11 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         CurrentPage = (ViewModelBase)selected;
     }
 
-    // Dynamic list of all menu options
+    // List of all menu options
     public ObservableCollection<ListItemTemplate> Items { get; } = new()
     {
         new ListItemTemplate(typeof(HomePageViewModel)),
+        new ListItemTemplate(typeof(SquadPageViewModel)),
         new ListItemTemplate(typeof(FixturesPageViewModel)),
         new ListItemTemplate(typeof(LeagueTablePageViewModel)),
     };
@@ -43,7 +44,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 
 }
 
-// Formats name of the class before appearing in the menu
+// Gets and formats name of the class before appearing in the menu
 public class ListItemTemplate
 {
     public ListItemTemplate(Type type)
