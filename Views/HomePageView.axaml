@@ -11,7 +11,7 @@
 		<Styles>
 			<Styles.Resources>
 				<Template x:Key="Shirt">
-					<Path Fill="#ff8c00" Stretch="Uniform" Data="
+					<Path Fill="#d0600f" Stretch="Uniform" Data="
           M271.063165,15.7244178 
           C273.864811,16.960698 277.684595,19.4995861 285.975507,22.3986064 
           C317.935954,35.6328718 378.489065,50.1924525 403.722945,58.1333266 
@@ -42,27 +42,68 @@
 
 		</Styles>
 	</UserControl.Styles>
-	
-	<Grid ColumnDefinitions="*,*,*">
+
+	<Grid ColumnDefinitions="*,*,*" Background="#555555">
 		<Grid Grid.Column="0" RowDefinitions="*,*">
-			<Rectangle Grid.Row="0" Fill="#ff6000"></Rectangle>
-			<Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">PREVIOUS MATCH</Label>
-			<Rectangle Grid.Row="1" Fill="Red"></Rectangle>
+			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<Border Grid.Row="0"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<StackPanel>
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+						   Padding="30" FontFamily="Bold">PREVIOUS MATCH</TextBlock>
+			</StackPanel>
+			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
+					CornerRadius="20" Margin="2">
+			</Border>
 			<WrapPanel Grid.Row="1" ClipToBounds="True" HorizontalAlignment="Center">
 				<Border Classes="Rect" Padding="10"/>
 			</WrapPanel>
 			<Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">VIEW SQUAD</Label>
 		</Grid>
 		<Grid Grid.Column="1" RowDefinitions="*,*">
-			<Rectangle Grid.Row="0" Fill="#d0600f"></Rectangle>
-			<Button Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">NEXT MATCH</Button>
-			<Rectangle Grid.Row="1" Fill="Green"></Rectangle>
+			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<Border Grid.Row="0"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<StackPanel>
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+						   Padding="30" FontFamily="Bold">NEXT MATCH</TextBlock>
+			</StackPanel>
+			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
+					CornerRadius="20" Margin="2">
+			</Border>
 			<Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">PAY SUBS</Label>
 		</Grid>
 		<Grid Grid.Column="2">
-			<Rectangle Fill="Gray"></Rectangle>
-			<Label HorizontalAlignment="Center" VerticalAlignment="Center">LEAGUE TABLE</Label>
+			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="100"
+					CornerRadius="20" Margin="2">
+			</Border>
+			<ScrollViewer>
+				<StackPanel>
+					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+							   Padding="30" FontFamily="Bold" FontSize="24">LEAGUE TABLE</TextBlock>
+					<Grid ColumnDefinitions="1*,5*,1*">
+						<TextBlock HorizontalAlignment="Center" Grid.Column="0">Pos</TextBlock>
+						<TextBlock Grid.Column="1">Team</TextBlock>
+						<TextBlock HorizontalAlignment="Center" Grid.Column="2">Pts</TextBlock>
+					</Grid>
+				</StackPanel>
+			</ScrollViewer>
 		</Grid>
 	</Grid>
-	
+
 </UserControl>

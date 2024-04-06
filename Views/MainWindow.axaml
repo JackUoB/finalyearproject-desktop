@@ -3,34 +3,86 @@
         xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="550"
         x:Class="FinalYearProjectDesktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="FinalYearProjectDesktop"
-		MinWidth="800" MinHeight="450">
+		MinWidth="900" MinHeight="550">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-	
-	<Grid RowDefinitions="*,10*">
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector="Button.menu">
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="Margin" Value="3,1,1,1" />
+			<Setter Property="FontSize" Value="26" />
+			<Setter Property="Foreground" Value="#ff8c00" />
+			<Setter Property="Background" Value="#333333" />
+		</Style>
+		<Style Selector="Button.menu:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="#ff8c00" />
+			<Setter Property="Foreground" Value="Black" />
+			<Setter Property="Opacity" Value="50" />
+		</Style>
+	</Window.Styles>
+
+
+	<Grid RowDefinitions="*,10*,">
 		<Grid Grid.Row="0" ColumnDefinitions="*,*,*" Background="#333333">
 			<Button Grid.Column="0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Center"
-					Margin="3,1,1,1"
-					FontSize="28"
-					Foreground="#ff8c00"
-					Command="{Binding TriggerPaneCommand}">≡</Button>
+					Classes="menu"
+					Command="{Binding TriggerPaneCommand}"
+					IsVisible="{Binding IsUserLoggedIn}"
+					Name="SideMenuButton">≡</Button>
 			<TextBlock Grid.Column="1"
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Center"
-					   FontSize="32"
+					   FontSize="38"
 					   FontStyle="Oblique"
-					   Foreground="#ff8c00">SE TIGERS</TextBlock>
+					   Foreground="#ff8c00"
+					   IsVisible="{Binding IsUserLoggedIn}"
+					   Name="SETIGERS">SE TIGERS</TextBlock>
+			<Grid Grid.Column="2" ColumnDefinitions="5*,*">
+				<Grid Grid.Column="0" RowDefinitions="*,*,*">
+					<TextBlock Grid.Row="0"
+							   HorizontalAlignment="Right"
+						   VerticalAlignment="Bottom"
+					       Padding="0,0,10,0"
+					       FontStyle="Oblique"
+					       Foreground="#ff8c00"
+					       IsVisible="{Binding IsUserLoggedIn}"
+						   FontSize="14">Logged in as</TextBlock>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Right"
+						   VerticalAlignment="Top"
+					       Padding="0,0,10,0"
+					       FontStyle="Oblique"
+					       Foreground="#ff8c00"
+					       IsVisible="{Binding IsUserLoggedIn}"
+						   FontSize="14">Manager</TextBlock>
+					<TextBlock Grid.Row="2"
+							   HorizontalAlignment="Right"
+							   VerticalAlignment="Center"
+							   Padding="0,0,10,0"
+							   Foreground="White"
+							   FontSize="12"
+							   FontWeight="Light"
+							   TextDecorations="Underline"
+							   IsVisible="{Binding IsUserLoggedIn}">Log out</TextBlock>
+				</Grid>
+				<TextBlock Grid.Column="1"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Center"
+						   Foreground="White"
+						   Padding="0,0,10,0"
+					       IsVisible="{Binding IsUserLoggedIn}">Icon</TextBlock>
+			</Grid>
 		</Grid>
 		<Grid Grid.Row="1">
 			<SplitView IsPaneOpen="{Binding IsPaneOpen}"
@@ -45,7 +97,7 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate DataType="{x:Type vm:ListItemTemplate}">
 									<StackPanel Spacing="15" Orientation="Horizontal">
-										<TextBlock Foreground="Orange" Text="{Binding Label}" />
+										<TextBlock Foreground="#ff8c00" Text="{Binding Label}" />
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
@@ -57,5 +109,5 @@
 				</SplitView.Content>
 			</SplitView>
 		</Grid>
-	</Grid>	
+	</Grid>
 </Window>

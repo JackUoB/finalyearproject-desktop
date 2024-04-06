@@ -17,7 +17,7 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
         string dbPath = @"finalyearproject.db";
         string connString = $"Data Source={dbPath}";
-        
+
         using (var connection = new SqliteConnection(connString))
         {
             connection.Open();
@@ -44,7 +44,8 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
             connection.Close();
         }
     }
-    
+
+    public ObservableCollection<Player> PlayerListAll { get; } = new();
     public ObservableCollection<Player> PlayerListColumnA { get; } = new();
     public ObservableCollection<Player> PlayerListColumnB { get; } = new();
     public ObservableCollection<Player> PlayerListColumnC { get; } = new();
@@ -55,19 +56,21 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
 
         for (int i = 0; i < squadInfo.Count; i++)
         {
+            PlayerListAll.Add(new Player(squadInfo[i].Item2, squadInfo[i].Item1));
+
             if (i % 3 == 0)
             {
                 PlayerListColumnA.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
-            } 
+            }
             else if (i % 3 == 1)
             {
                 PlayerListColumnB.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
-            } 
+            }
             else if (i % 3 == 2)
             {
                 PlayerListColumnC.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
             }
-            
+
         }
 
     }
@@ -75,12 +78,12 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
 
 public class Player
 {
-    public Player(string shirtname, string shirtnumber)
+    public Player(string name, string number)
     {
-        ShirtName = shirtname;
-        ShirtNumber = shirtnumber;
+        Name = name;
+        Number = number;
     }
-    public string ShirtName { get; }
-    public string ShirtNumber { get; }
-    
+    public string Name { get; }
+    public string Number { get; }
+
 }

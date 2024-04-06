@@ -1,23 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FinalYearProjectDesktop.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace FinalYearProjectDesktop.ViewModels;
+
+
+public partial class Login
+{
+    public static Boolean _loggedIn = true;
+}
 
 public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     [ObservableProperty]
+    private bool _isUserLoggedIn = Login._loggedIn;
+
+    [ObservableProperty]
     private bool _isPaneOpen = false;
 
     [ObservableProperty]
-    private ViewModelBase _currentPage = new HomePageViewModel();
+    private ViewModelBase _currentPage = new LoginPageViewModel();
 
     [ObservableProperty]
     private ListItemTemplate? _selectedListItem;
 
-    // Makes selected menu button become the active page
+    // Makes selected menu option become the active page
     partial void OnSelectedListItemChanged(ListItemTemplate? value)
     {
         if (value is null) return;
@@ -41,7 +52,6 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         IsPaneOpen = !IsPaneOpen;
     }
-
 }
 
 // Gets and formats name of the class before appearing in the menu
@@ -51,10 +61,10 @@ public class ListItemTemplate
     {
         ModelType = type;
         Label = type.Name.Replace("PageViewModel", "");
-        
+
         // Inserts spaces into any menu options that need it
-        for (int i=0; i<Label.Length; i++)
-        { 
+        for (int i = 0; i < Label.Length; i++)
+        {
             string c = Label[i].ToString();
             if (c.Equals(c.ToUpper()))
             {
