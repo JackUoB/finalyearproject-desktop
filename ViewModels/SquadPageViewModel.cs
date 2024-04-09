@@ -45,7 +45,10 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
+    // For the list view
     public ObservableCollection<Player> PlayerListAll { get; } = new();
+
+    // For the grid view
     public ObservableCollection<Player> PlayerListColumnA { get; } = new();
     public ObservableCollection<Player> PlayerListColumnB { get; } = new();
     public ObservableCollection<Player> PlayerListColumnC { get; } = new();

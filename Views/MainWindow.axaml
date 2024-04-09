@@ -16,6 +16,14 @@
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Styling/MyResourceDictionary.axaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	
 	<Window.Styles>
 		<Style Selector="Button.menu">
 			<Setter Property="HorizontalAlignment" Value="Left" />
@@ -97,7 +105,7 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate DataType="{x:Type vm:ListItemTemplate}">
 									<StackPanel Spacing="15" Orientation="Horizontal">
-										<TextBlock Foreground="#ff8c00" Text="{Binding Label}" />
+										<TextBlock Text="{Binding Label}" />
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>

@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	
+	<!--Colours-->
+	<Color x:Key="MyFontColour">#FFFF8C00</Color>
+	
+	<Color x:Key="MyPointOverColour">#88FF8C00</Color>
+	<Color x:Key="MyPointOverFontColour">#FF000000</Color>
+	
+	<Color x:Key="MySelectedColour">#FFFF8C00</Color>
+	<Color x:Key="MySelectedFontColour">#FF000000</Color>
+	
+
+	<!--Default ListBox-->
+	<SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="{DynamicResource MyFontColour}" />
+	
+	<!--Pointer Over on Listbox-->
+	<SolidColorBrush x:Key="SystemControlHighlightListLowBrush" Color="{DynamicResource MyPointOverColour}" />
+	<SolidColorBrush x:Key="SystemControlHighlightAltBaseHighBrush" Color="{DynamicResource MyPointOverFontColour}" />
+
+	<!--Selected on Listbox-->
+	<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush" Color="{DynamicResource MySelectedColour}" />
+	<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush" Color="{DynamicResource MySelectedColour}" />
+	
+</ResourceDictionary>

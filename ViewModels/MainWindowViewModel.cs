@@ -9,15 +9,26 @@ using System.Diagnostics;
 namespace FinalYearProjectDesktop.ViewModels;
 
 
-public partial class Login
+public static class Login
 {
-    public static Boolean _loggedIn = true;
+    public static event EventHandler OnLogin;
+
+    private static bool _loggedIn = false;
+    public static Boolean LoggedIn
+    {
+        get => _loggedIn;
+        set
+        {
+            _loggedIn = value;
+            OnLogin?.Invoke(null, EventArgs.Empty);
+        }
+    }
 }
 
 public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     [ObservableProperty]
-    private bool _isUserLoggedIn = Login._loggedIn;
+    private bool _isUserLoggedIn = Login.LoggedIn;
 
     [ObservableProperty]
     private bool _isPaneOpen = false;
@@ -27,6 +38,23 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 
     [ObservableProperty]
     private ListItemTemplate? _selectedListItem;
+
+    public MainWindowViewModel() : base()
+    {
+        Login.OnLogin += Login_OnLogin;
+    }
+
+    private void Login_OnLogin(object? sender, EventArgs e)
+    {
+        IsUserLoggedIn = Login.LoggedIn;
+        if (Login.LoggedIn)
+        {
+            CurrentPage = new HomePageViewModel();
+        } else
+        {
+            CurrentPage = new LoginPageViewModel();
+        }
+    }
 
     // Makes selected menu option become the active page
     partial void OnSelectedListItemChanged(ListItemTemplate? value)

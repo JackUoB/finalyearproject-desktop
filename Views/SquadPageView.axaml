@@ -9,7 +9,7 @@
              x:Class="FinalYearProjectDesktop.Views.SquadPageView"
 			 x:DataType="vm:SquadPageViewModel"
              x:CompileBindings="True">
-
+	
 	<UserControl.Styles>
 		<Styles>
 			<Style Selector="Border.Shirt">

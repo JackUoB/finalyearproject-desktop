@@ -40,6 +40,10 @@
 				<Setter Property="Child" Value="{StaticResource Shirt}"/>
 			</Style>
 
+			<Style Selector="TextBlock.text">
+				<Setter Property="Foreground" Value="#000000" />
+			</Style>
+
 		</Styles>
 	</UserControl.Styles>
 
@@ -52,7 +56,7 @@
 					CornerRadius="20" Margin="2">
 			</Border>
 			<StackPanel>
-				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+				<TextBlock Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
 						   Padding="30" FontFamily="Bold">PREVIOUS MATCH</TextBlock>
 			</StackPanel>
 			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
@@ -64,7 +68,8 @@
 			<WrapPanel Grid.Row="1" ClipToBounds="True" HorizontalAlignment="Center">
 				<Border Classes="Rect" Padding="10"/>
 			</WrapPanel>
-			<Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">VIEW SQUAD</Label>
+			<TextBlock Grid.Row="1" Classes="text" 
+				   HorizontalAlignment="Center" VerticalAlignment="Center">VIEW SQUAD</TextBlock>
 		</Grid>
 		<Grid Grid.Column="1" RowDefinitions="*,*">
 			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"
@@ -74,7 +79,7 @@
 					CornerRadius="20" Margin="2">
 			</Border>
 			<StackPanel>
-				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+				<TextBlock Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
 						   Padding="30" FontFamily="Bold">NEXT MATCH</TextBlock>
 			</StackPanel>
 			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
@@ -83,7 +88,8 @@
 			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
 					CornerRadius="20" Margin="2">
 			</Border>
-			<Label Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">PAY SUBS</Label>
+			<TextBlock Grid.Row="1" Classes="text"
+					   HorizontalAlignment="Center" VerticalAlignment="Center">PAY SUBS</TextBlock>
 		</Grid>
 		<Grid Grid.Column="2">
 			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
@@ -94,12 +100,12 @@
 			</Border>
 			<ScrollViewer>
 				<StackPanel>
-					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+					<TextBlock Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
 							   Padding="30" FontFamily="Bold" FontSize="24">LEAGUE TABLE</TextBlock>
 					<Grid ColumnDefinitions="1*,5*,1*">
-						<TextBlock HorizontalAlignment="Center" Grid.Column="0">Pos</TextBlock>
-						<TextBlock Grid.Column="1">Team</TextBlock>
-						<TextBlock HorizontalAlignment="Center" Grid.Column="2">Pts</TextBlock>
+						<TextBlock Classes="text" HorizontalAlignment="Center" Grid.Column="0">Pos</TextBlock>
+						<TextBlock Classes="text" Grid.Column="1">Team</TextBlock>
+						<TextBlock Classes="text" HorizontalAlignment="Center" Grid.Column="2">Pts</TextBlock>
 					</Grid>
 				</StackPanel>
 			</ScrollViewer>

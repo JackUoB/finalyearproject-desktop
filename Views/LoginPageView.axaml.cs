@@ -18,11 +18,11 @@ public partial class LoginPageView : UserControl
     private void Button_Click(object? sender, RoutedEventArgs e)
     {
         Debug.WriteLine("btnclicked");
-        Debug.WriteLine($"{Login._loggedIn}");
-        Login._loggedIn = true;
-        Debug.WriteLine($"{Login._loggedIn}");
+        Debug.WriteLine($"{Login.LoggedIn}");
+        Login.LoggedIn = true;
+        Debug.WriteLine($"{Login.LoggedIn}");
 
-        if (Login._loggedIn)
+        if (Login.LoggedIn)
         {
             Debug.WriteLine("check");
         }
