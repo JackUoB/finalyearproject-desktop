@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="550"
         x:Class="FinalYearProjectDesktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/tigericon.png"
         Title="FinalYearProjectDesktop"
 		MinWidth="900" MinHeight="550">
 
@@ -45,10 +45,15 @@
 		<Grid Grid.Row="0" ColumnDefinitions="*,*,*" Background="#333333">
 			<Button Grid.Column="0"
 					Classes="menu"
+					Foreground="#ff8c00"
 					Command="{Binding TriggerPaneCommand}"
 					IsVisible="{Binding IsUserLoggedIn}"
 					Name="SideMenuButton">≡</Button>
-			<TextBlock Grid.Column="1"
+			<StackPanel Grid.Column="1" Orientation="Horizontal">
+				<Image Source="/Assets/tiger.png"
+					   Margin="0,5,30,0"					   
+					   IsVisible="{Binding IsUserLoggedIn}"/>
+				<TextBlock 
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Center"
 					   FontSize="38"
@@ -56,6 +61,7 @@
 					   Foreground="#ff8c00"
 					   IsVisible="{Binding IsUserLoggedIn}"
 					   Name="SETIGERS">SE TIGERS</TextBlock>
+			</StackPanel>
 			<Grid Grid.Column="2" ColumnDefinitions="5*,*">
 				<Grid Grid.Column="0" RowDefinitions="*,*,*">
 					<TextBlock Grid.Row="0"
@@ -68,12 +74,13 @@
 						   FontSize="14">Logged in as</TextBlock>
 					<TextBlock Grid.Row="1"
 							   HorizontalAlignment="Right"
-						   VerticalAlignment="Top"
+							VerticalAlignment="Top"
 					       Padding="0,0,10,0"
 					       FontStyle="Oblique"
 					       Foreground="#ff8c00"
 					       IsVisible="{Binding IsUserLoggedIn}"
-						   FontSize="14">Manager</TextBlock>
+						   FontSize="14"
+						   Text="{Binding UserLoggedIn}"/>
 					<TextBlock Grid.Row="2"
 							   HorizontalAlignment="Right"
 							   VerticalAlignment="Center"
@@ -82,7 +89,8 @@
 							   FontSize="12"
 							   FontWeight="Light"
 							   TextDecorations="Underline"
-							   IsVisible="{Binding IsUserLoggedIn}">Log out</TextBlock>
+							   IsVisible="{Binding IsUserLoggedIn}"
+							   PointerPressed="Logout_PointerPressed">Log out</TextBlock>
 				</Grid>
 				<TextBlock Grid.Column="1"
 						   HorizontalAlignment="Center"

@@ -1,38 +1,51 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using DynamicData;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
 public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
 {
+    int squadSize = 0;
     List<Tuple<string, string>> squadInfo = new List<Tuple<string, string>>();
 
     public void getPlayerInfo()
     {
-        string dbPath = @"finalyearproject.db";
-        string connString = $"Data Source={dbPath}";
-
-        using (var connection = new SqliteConnection(connString))
+        using (var connection = new SqliteConnection(DatabaseInfo.connString))
         {
             connection.Open();
-
             var command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM squad";
 
+            // Counting squad size
+            command.CommandText = "SELECT COUNT(*) FROM squad";
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.Read() != false)
+                {
+                    squadSize = reader.GetInt32(0);
+                }
+                reader.Close();
+            }
+
+            // Take player information from database
+            command.CommandText = "SELECT * FROM squad ORDER BY squad_number ASC";
             using (var reader = command.ExecuteReader())
             {
                 squadInfo = new List<Tuple<string, string>>();
-                for (int i = 0; i < 99; i++)
+                for (int i = 0; i < squadSize; i++)
                 {
                     if (reader.Read() != false)
                     {
-                        squadInfo.Add(new Tuple<string, string>(reader.GetString(0), reader.GetString(1)));
+                        if (reader.IsDBNull(0))
+                        {
+                            continue;
+                        } 
+                        else
+                        {
+                            squadInfo.Add(new Tuple<string, string>(reader.GetString(0), reader.GetString(1)));
+                        }
                     }
                     else
                     {

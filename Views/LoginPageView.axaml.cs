@@ -1,30 +1,97 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using FinalYearProjectDesktop.ViewModels;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Data.Sqlite;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using Tmds.DBus.Protocol;
 
 namespace FinalYearProjectDesktop.Views;
 
 public partial class LoginPageView : UserControl
 {
+    int squadSize = 0;
+    List<Tuple<string, string, string>> squadLogin = new List<Tuple<string, string, string>>();
 
     public LoginPageView()
     {
-        Debug.WriteLine("initialised");
         InitializeComponent();
     }
 
     private void Button_Click(object? sender, RoutedEventArgs e)
     {
-        Debug.WriteLine("btnclicked");
-        Debug.WriteLine($"{Login.LoggedIn}");
-        Login.LoggedIn = true;
-        Debug.WriteLine($"{Login.LoggedIn}");
+        LoginCredentials();
 
-        if (Login.LoggedIn)
+        for (int i = 0; i < squadLogin.Count; i++)
         {
-            Debug.WriteLine("check");
+            if (squadLogin[i].Item1 == UsernameEntered.Text && squadLogin[i].Item2 != PasswordEntered.Text) 
+            {
+                ErrorMessage.Text = "Incorrect password";
+            }
+            else if (squadLogin[i].Item1 == UsernameEntered.Text && squadLogin[i].Item2 == PasswordEntered.Text)
+            {
+                Login.LoggedIn = true;
+                Login.UserLoggedIn = squadLogin[i].Item3;
+
+                if (squadLogin[i].Item3 == "Manager")
+                {
+                    Login.IsManagerLoggedIn = true;
+                }
+            } 
+            else
+            {
+                ErrorMessage.Text = "Username not recognised";
+            }
+        }
+    }
+
+    public void LoginCredentials()
+    {
+        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        {
+            connection.Open();
+            var command = connection.CreateCommand();
+
+            // Counting squad size
+            command.CommandText = "SELECT COUNT(*) FROM squad";
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.Read() != false)
+                {
+                    squadSize = reader.GetInt32(0);
+                }
+                reader.Close();
+            }
+
+            // Take login credentials from database
+            command.CommandText = "SELECT * FROM squad ORDER BY squad_number ASC";
+            using (var reader = command.ExecuteReader())
+            {
+                squadLogin = new List<Tuple<string, string, string>>();
+                for (int i = 0; i < squadSize; i++)
+                {
+                    if (reader.Read() != false)
+                    {
+                        if (reader.IsDBNull(0))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            squadLogin.Add(new Tuple<string, string, string>(reader.GetString(3), reader.GetString(4), reader.GetString(1)));
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                reader.Close();
+            }
+            connection.Close();
+            squadLogin.Add(new Tuple<string, string, string>("Manager", "123", "Manager"));
         }
     }
 }

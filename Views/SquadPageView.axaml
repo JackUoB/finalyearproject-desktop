@@ -73,15 +73,31 @@
 
 			<Style Selector="TabItem.tab:pointerover /template/ ContentPresenter">
 				<Setter Property="Foreground" Value="#ff8c00" />
-				<Setter Property="Opacity" Value="50" />
+				<Setter Property="Opacity" Value="70" />
 			</Style>
 
 			<Style Selector="TabItem.tab:not(:selected)">
 				<Setter Property="Foreground" Value="#ff8c00" />
-				<Setter Property="Opacity" Value="70" />
+				<Setter Property="Opacity" Value="50" />
+			</Style>
+
+			<Style Selector="Button.add">
+				<Setter Property="Background" Value="#d0600f" />
+				<Setter Property="Foreground" Value="#111111" />
+				<Setter Property="Width" Value="200" />
+				<Setter Property="HorizontalContentAlignment" Value="Center" />
+				<Setter Property="Margin" Value="0,15,0,0" />
+				<Setter Property="Content" Value="Add Player" />
+			</Style>
+			
+			<Style Selector="Button.add:pointerover /template/ ContentPresenter">
+				<Setter Property="Background" Value="#d0600f" />
+				<Setter Property="Foreground" Value="#111111" />
+				<Setter Property="Opacity" Value="50" />
 			</Style>
 
 		</Styles>
+
 	</UserControl.Styles>
 
 	<DockPanel Background="#555555">
@@ -91,7 +107,7 @@
 					<ScrollViewer>
 						<StackPanel>
 							<Grid ColumnDefinitions="*,*,*" Margin="10">
-								<ListBox Grid.Column="0" ItemsSource="{Binding PlayerListColumnA}" Background="#555555">
+								<ListBox Grid.Column="0" ItemsSource="{Binding PlayerListColumnA}" Background="#555555" IsHitTestVisible="False">
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
@@ -121,7 +137,7 @@
 										</DataTemplate>
 									</ListBox.ItemTemplate>
 								</ListBox>
-								<ListBox Grid.Column="1" ItemsSource="{Binding PlayerListColumnB}" Background="#555555">
+								<ListBox Grid.Column="1" ItemsSource="{Binding PlayerListColumnB}" Background="#555555" IsHitTestVisible="False">
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
@@ -151,7 +167,7 @@
 										</DataTemplate>
 									</ListBox.ItemTemplate>
 								</ListBox>
-								<ListBox Grid.Column="2" ItemsSource="{Binding PlayerListColumnC}" Background="#555555">
+								<ListBox Grid.Column="2" ItemsSource="{Binding PlayerListColumnC}" Background="#555555" IsHitTestVisible="False">
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
@@ -188,7 +204,7 @@
 				<TabItem Header="List" Classes="tab">
 					<ScrollViewer>
 						<StackPanel Orientation="Vertical" Spacing="8">
-							<ListBox Grid.Column="2" ItemsSource="{Binding PlayerListAll}" Background="#555555">
+							<ListBox Grid.Column="2" ItemsSource="{Binding PlayerListAll}" Background="#555555" IsHitTestVisible="False">
 								<ListBox.ItemTemplate>
 									<DataTemplate DataType="{x:Type vm:Player}">
 										<Grid ColumnDefinitions="*,15*">
@@ -204,7 +220,23 @@
 					</ScrollViewer>
 				</TabItem>
 				<TabItem Header="Add New Player" Classes="tab">
-					<TextBlock Foreground="White" Padding="10">Coming soon.</TextBlock>
+					<StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50">
+						<TextBlock Foreground="#d0600f">First Name:</TextBlock>
+						<TextBox Name="FirstName" Width="200"></TextBox>
+						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Surname:</TextBlock>
+						<TextBox Name="LastName" Width="200"></TextBox>
+						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Position:</TextBlock>
+						<ComboBox Name="Position" Width="200">
+							<ComboBoxItem>Goalkeeper</ComboBoxItem>
+							<ComboBoxItem>Defender</ComboBoxItem>
+							<ComboBoxItem>Midfielder</ComboBoxItem>
+							<ComboBoxItem>Forward</ComboBoxItem>
+						</ComboBox>
+						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Shirt Number:</TextBlock>
+						<NumericUpDown Name="SquadNumber" Width="200" Minimum="1" Maximum="99" FormatString="0" />
+						<Button Name="LoginButton" Classes="add" Click="Button_Click" />
+						<TextBlock Name="ErrorMessage" HorizontalAlignment="Right" FontSize="10" Foreground="#ffffff"></TextBlock>
+					</StackPanel>
 				</TabItem>
 			</TabControl>
 		</DockPanel>

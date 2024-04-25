@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using FinalYearProjectDesktop.ViewModels;
 
 namespace FinalYearProjectDesktop.Views
 {
@@ -7,6 +8,11 @@ namespace FinalYearProjectDesktop.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Logout_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+            Login.LoggedIn = false;
         }
     }
 }

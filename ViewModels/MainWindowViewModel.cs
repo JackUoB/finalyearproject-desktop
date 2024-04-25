@@ -5,15 +5,24 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
+public static class DatabaseInfo
+{
+    static string dbPath = Directory.GetCurrentDirectory().Replace(@"finalyearproject-desktop\bin\Debug\net6.0", @"sqlite\test.db");
+    public static string connString = $"Data Source={dbPath}";
+}
 
 public static class Login
 {
-    public static event EventHandler OnLogin;
+    public static event EventHandler? OnLogin;
 
-    private static bool _loggedIn = false;
+    private static bool _loggedIn = true; // MAKE FALSE
+    private static string _userLoggedIn = "user";
+    private static bool _isManagerLoggedIn = false;
+
     public static Boolean LoggedIn
     {
         get => _loggedIn;
@@ -23,12 +32,38 @@ public static class Login
             OnLogin?.Invoke(null, EventArgs.Empty);
         }
     }
+
+    public static string UserLoggedIn
+    {
+        get => _userLoggedIn;
+        set
+        {
+            _userLoggedIn = value;
+            OnLogin?.Invoke(null, EventArgs.Empty);
+        }
+    }
+
+    public static Boolean IsManagerLoggedIn
+    {
+        get => _isManagerLoggedIn;
+        set
+        {
+            _isManagerLoggedIn = value;
+            OnLogin?.Invoke(null, EventArgs.Empty);
+        }
+    }
 }
 
 public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     [ObservableProperty]
     private bool _isUserLoggedIn = Login.LoggedIn;
+
+    [ObservableProperty]
+    private string _userLoggedIn = Login.UserLoggedIn;
+
+    [ObservableProperty]
+    private bool _isManagerLoggedIn = Login.IsManagerLoggedIn;
 
     [ObservableProperty]
     private bool _isPaneOpen = false;
@@ -44,15 +79,21 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         Login.OnLogin += Login_OnLogin;
     }
 
+    // When user is logged in or logged out
     private void Login_OnLogin(object? sender, EventArgs e)
     {
         IsUserLoggedIn = Login.LoggedIn;
+        UserLoggedIn = Login.UserLoggedIn;
+
         if (Login.LoggedIn)
         {
             CurrentPage = new HomePageViewModel();
-        } else
+        } 
+        else
         {
+            IsPaneOpen = false; 
             CurrentPage = new LoginPageViewModel();
+            IsManagerLoggedIn = false;
         }
     }
 

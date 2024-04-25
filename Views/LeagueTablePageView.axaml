@@ -1,8 +1,56 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="FinalYearProjectDesktop.Views.LeagueTablePageView">
-  Welcome to League Table!
+             x:Class="FinalYearProjectDesktop.Views.LeagueTablePageView"
+			 x:DataType="vm:LeagueTablePageViewModel"
+             x:CompileBindings="True">
+
+	<ScrollViewer>
+		<StackPanel Orientation="Vertical" Spacing="8" Background="#555555">
+			<TextBlock FontSize="32" HorizontalAlignment="Center" Padding="10" Text="LEAGUE TABLE"/>
+			<Border BorderBrush="Black" BorderThickness="1" CornerRadius="20"
+						Margin="10" Padding="6" Opacity="50">
+			<StackPanel>
+					<Grid ColumnDefinitions="*,4*,*,*,*,*,*,*,*,*" Margin="17,8,18,4">
+						<TextBlock Grid.Column="0" TextAlignment="Left" Foreground="#ffffff" Text="Pos." />
+						<TextBlock Grid.Column="1" TextAlignment="Left" Foreground="#ffffff" Padding="4,0,0,0" Text="Name" />
+						<TextBlock Grid.Column="2" TextAlignment="Center" Foreground="#ffffff" Text="P" />
+						<TextBlock Grid.Column="3" TextAlignment="Center" Foreground="#ffffff" Text="W" />
+						<TextBlock Grid.Column="4" TextAlignment="Center" Foreground="#ffffff" Text="D" />
+						<TextBlock Grid.Column="5" TextAlignment="Center" Foreground="#ffffff" Text="L" />
+						<TextBlock Grid.Column="6" TextAlignment="Center" Foreground="#ffffff" Text="GF" />
+						<TextBlock Grid.Column="7" TextAlignment="Center" Foreground="#ffffff" Text="GA" />
+						<TextBlock Grid.Column="8" TextAlignment="Center" Foreground="#ffffff" Text="GD" />
+						<TextBlock Grid.Column="9" TextAlignment="Center" Foreground="#ffffff" Text="Pts." />
+					</Grid>
+					<ListBox ItemsSource="{Binding Teams}" Background="#555555" IsHitTestVisible="False">
+						<ListBox.ItemTemplate>
+							<DataTemplate DataType="{x:Type vm:Team}">
+								<StackPanel>
+									<Grid ColumnDefinitions="*,4*,*,*,*,*,*,*,*,*" Margin="8">
+										<TextBlock Grid.Column="0" TextAlignment="Left" FontWeight="Bold" Text="{Binding Position}" />
+										<TextBlock Grid.Column="1" TextAlignment="Left" FontWeight="Bold" Text="{Binding Name}" />
+										<TextBlock Grid.Column="2" TextAlignment="Center" Text="{Binding Played}" />
+										<TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding Wins}" />
+										<TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding Draws}" />
+										<TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding Losses}" />
+										<TextBlock Grid.Column="6" TextAlignment="Center" Text="{Binding GoalsFor}" />
+										<TextBlock Grid.Column="7" TextAlignment="Center" Text="{Binding GoalsAgainst}" />
+										<TextBlock Grid.Column="8" TextAlignment="Center" Text="{Binding GoalDifference}" />
+										<TextBlock Grid.Column="9" TextAlignment="Center" FontWeight="Bold" Text="{Binding Points}" />
+									</Grid>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+			</StackPanel>
+		</Border>
+		</StackPanel>
+	</ScrollViewer>
+	
 </UserControl>

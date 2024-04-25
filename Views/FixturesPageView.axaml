@@ -2,9 +2,481 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="FinalYearProjectDesktop.Views.FixturesPageView">
-    Welcome to Fixtures!
+             x:Class="FinalYearProjectDesktop.Views.FixturesPageView"
+			 x:DataType="vm:FixturesPageViewModel"
+             x:CompileBindings="True">
+
+	<UserControl.Styles>
+		<Style Selector="TextBlock.headings">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+			<Setter Property="Foreground" Value="#ffffff" />
+		</Style>
+		
+		<Style Selector="TextBlock.fixture">
+			<Setter Property="Padding" Value="2" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+		</Style>
+
+		<Style Selector="TabItem.tab">
+			<Setter Property="Foreground" Value="#ff8c00" />
+		</Style>
+
+		<Style Selector="TabItem.tab:pointerover /template/ ContentPresenter">
+			<Setter Property="Foreground" Value="#ff8c00" />
+			<Setter Property="Opacity" Value="70" />
+		</Style>
+
+		<Style Selector="TabItem.tab:not(:selected)">
+			<Setter Property="Foreground" Value="#ff8c00" />
+			<Setter Property="Opacity" Value="50" />
+		</Style>
+	</UserControl.Styles>
+
+	<DockPanel Background="#555555">
+		<DockPanel Margin="4">
+			<TabControl Margin="0,12,0,0" TabStripPlacement="Top">
+				<TabItem Header="SE Tigers Fixtures" Classes="tab">
+					<ScrollViewer>
+						<StackPanel Orientation="Vertical" Spacing="8">
+							<Grid Grid.Column="0" ColumnDefinitions="6*,6*,4*,9*,4*,9*,9*" Margin="13,8,12,4">
+								<TextBlock Grid.Column="0" Classes="headings" Text="Week" />
+								<TextBlock Grid.Column="1" Classes="headings" Text="Date" />
+								<TextBlock Grid.Column="2" Classes="headings" Text="Time" />
+								<TextBlock Grid.Column="3" Classes="headings" HorizontalAlignment="Right" Text="Home Team" />
+								<TextBlock Grid.Column="4" Classes="headings" HorizontalAlignment="Center" Text="Score" />
+								<TextBlock Grid.Column="5" Classes="headings" HorizontalAlignment="Left" Text="Away Team" />
+								<TextBlock Grid.Column="6" Classes="headings" Text="Venue" />
+							</Grid>
+								<ListBox ItemsSource="{Binding SETigersFixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<StackPanel>
+												<Grid Grid.Column="0" ColumnDefinitions="6*,6*,4*,9*,4*,9*,9*">
+													<TextBlock Grid.Column="0" Classes="fixture" FontWeight="Bold" Text="{Binding Week}" />
+													<TextBlock Grid.Column="1" Classes="fixture" Text="{Binding Date}" />
+													<TextBlock Grid.Column="2" Classes="fixture" Text="{Binding Time}" />
+													<TextBlock Grid.Column="3" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+													<TextBlock Grid.Column="4" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+													<TextBlock Grid.Column="5" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+													<TextBlock Grid.Column="6" Classes="fixture" Text="{Binding Venue}" />
+												</Grid>
+											</StackPanel>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+						</StackPanel>
+					</ScrollViewer>
+				</TabItem>
+				<TabItem Header="All Fixtures" Classes="tab">
+					<ScrollViewer>
+						<StackPanel Orientation="Vertical" Spacing="8">
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 1</TextBlock>
+								<Border BorderBrush="Black" 
+										BorderThickness="1" 
+										CornerRadius="20" 
+										Margin="10" 
+										Padding="6" 
+										Opacity="50">
+									<ListBox ItemsSource="{Binding Week1Fixtures}" Background="#555555">
+										<ListBox.ItemTemplate>
+											<DataTemplate DataType="{x:Type vm:Fixture}">
+													<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+														<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+														<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+														<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+														<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+														<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+														<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+												</Grid>
+											</DataTemplate>
+										</ListBox.ItemTemplate>
+									</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 2</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week2Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 3</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week3Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 4</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week4Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 5</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week5Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 6</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week6Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 7</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week7Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 8</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week8Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 9</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week9Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 10</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week10Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 11</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week11Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 12</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week12Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 13</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week13Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 14</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week14Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 15</TextBlock>
+							<Border BorderBrush="Black"
+									BorderThickness="1"
+									CornerRadius="20"
+									Margin="10"
+									Padding="6"
+									Opacity="50">
+								<ListBox ItemsSource="{Binding Week15Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 16</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week16Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 17</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week17Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" Classes="headings">Week 18</TextBlock>
+							<Border BorderBrush="Black"
+										BorderThickness="1"
+										CornerRadius="20"
+										Margin="10"
+										Padding="6"
+										Opacity="50">
+								<ListBox ItemsSource="{Binding Week18Fixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Border>
+						</StackPanel>
+					</ScrollViewer>
+				</TabItem>
+			</TabControl>
+		</DockPanel>
+	</DockPanel>
 </UserControl>

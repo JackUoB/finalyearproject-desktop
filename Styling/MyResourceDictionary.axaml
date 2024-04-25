@@ -5,10 +5,10 @@
 	<Color x:Key="MyFontColour">#FFFF8C00</Color>
 	
 	<Color x:Key="MyPointOverColour">#88FF8C00</Color>
-	<Color x:Key="MyPointOverFontColour">#FF000000</Color>
+	<Color x:Key="MyPointOverFontColour">#FF333333</Color>
 	
 	<Color x:Key="MySelectedColour">#FFFF8C00</Color>
-	<Color x:Key="MySelectedFontColour">#FF000000</Color>
+	<Color x:Key="MySelectedFontColour">#FF222222</Color>
 	
 
 	<!--Default ListBox-->

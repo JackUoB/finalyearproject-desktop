@@ -33,6 +33,7 @@
 			<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Password:</TextBlock>
 			<TextBox Name="PasswordEntered" Width="200" PasswordChar="*"></TextBox>
 			<Button Classes="login" Name="LoginButton" Click="Button_Click" />
+			<TextBlock Name="ErrorMessage" HorizontalAlignment="Right" FontSize="10" Foreground="#ffffff"></TextBlock>
 		</StackPanel>
 		<TextBlock Grid.Row="2"
 					   VerticalAlignment="Center" HorizontalAlignment="Center"
