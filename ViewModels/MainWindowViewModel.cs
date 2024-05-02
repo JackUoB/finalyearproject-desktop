@@ -19,7 +19,7 @@ public static class Login
 {
     public static event EventHandler? OnLogin;
 
-    private static bool _loggedIn = true; // MAKE FALSE
+    private static bool _loggedIn = false;
     private static string _userLoggedIn = "user";
     private static bool _isManagerLoggedIn = false;
 
@@ -91,7 +91,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         } 
         else
         {
-            IsPaneOpen = false; 
+            IsPaneOpen = false;
             CurrentPage = new LoginPageViewModel();
             IsManagerLoggedIn = false;
         }

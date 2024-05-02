@@ -3,11 +3,48 @@ using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
 public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
 {
+    [ObservableProperty]
+    private bool _isManagerLoggedIn = Login.IsManagerLoggedIn;
+
+    // For the list view
+    public ObservableCollection<Player> PlayerListAll { get; } = new();
+
+    // For the grid view
+    public ObservableCollection<Player> PlayerListColumnA { get; } = new();
+    public ObservableCollection<Player> PlayerListColumnB { get; } = new();
+    public ObservableCollection<Player> PlayerListColumnC { get; } = new();
+
+    public SquadPageViewModel()
+    {
+        getPlayerInfo();
+
+        for (int i = 0; i < squadInfo.Count; i++)
+        {
+            PlayerListAll.Add(new Player(squadInfo[i].Item2, squadInfo[i].Item1));
+
+            if (i % 3 == 0)
+            {
+                PlayerListColumnA.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
+            }
+            else if (i % 3 == 1)
+            {
+                PlayerListColumnB.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
+            }
+            else if (i % 3 == 2)
+            {
+                PlayerListColumnC.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
+            }
+
+        }
+
+    }
+
     int squadSize = 0;
     List<Tuple<string, string>> squadInfo = new List<Tuple<string, string>>();
 
@@ -56,39 +93,6 @@ public partial class SquadPageViewModel : ViewModelBase, INotifyPropertyChanged
             }
             connection.Close();
         }
-    }
-
-    // For the list view
-    public ObservableCollection<Player> PlayerListAll { get; } = new();
-
-    // For the grid view
-    public ObservableCollection<Player> PlayerListColumnA { get; } = new();
-    public ObservableCollection<Player> PlayerListColumnB { get; } = new();
-    public ObservableCollection<Player> PlayerListColumnC { get; } = new();
-
-    public SquadPageViewModel()
-    {
-        getPlayerInfo();
-
-        for (int i = 0; i < squadInfo.Count; i++)
-        {
-            PlayerListAll.Add(new Player(squadInfo[i].Item2, squadInfo[i].Item1));
-
-            if (i % 3 == 0)
-            {
-                PlayerListColumnA.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
-            }
-            else if (i % 3 == 1)
-            {
-                PlayerListColumnB.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
-            }
-            else if (i % 3 == 2)
-            {
-                PlayerListColumnC.Add(new Player(squadInfo[i].Item2.Split()[1].ToUpper(), squadInfo[i].Item1));
-            }
-
-        }
-
     }
 }
 

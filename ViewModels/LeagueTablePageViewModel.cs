@@ -89,9 +89,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
             leagueTable.Add(new Tuple<string, int, int, int, int, int, int>(teams[i], played, wins, draws, losses, goalsFor, goalsAgainst));
         }
         insertLeagueTableInfo(leagueTable);
-        getLeagueTableInfo();
-
-        
+        getLeagueTableInfo();        
     }
 
     public void getResultInfo()
@@ -102,7 +100,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
             var command = connection.CreateCommand();
 
             // Counting result list size
-            command.CommandText = "SELECT COUNT(*) FROM fixtures WHERE date_and_time < CURRENT_TIMESTAMP";
+            command.CommandText = "SELECT COUNT(*) FROM fixtures WHERE home_score != '' OR away_score != ''";
             using (var reader = command.ExecuteReader())
             {
                 if (reader.Read() != false)
@@ -114,7 +112,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
 
             // Take result information from database
             resultInfo = new List<Tuple<int, string, string, int, int, string, string>>();
-            command.CommandText = "SELECT * FROM fixtures WHERE date_and_time < CURRENT_TIMESTAMP";
+            command.CommandText = "SELECT * FROM fixtures WHERE home_score !='' OR away_score !=''";
             using (var reader = command.ExecuteReader())
             {
                 resultInfo = new List<Tuple<int, string, string, int, int, string, string>>();

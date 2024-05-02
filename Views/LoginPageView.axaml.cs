@@ -29,6 +29,7 @@ public partial class LoginPageView : UserControl
             if (squadLogin[i].Item1 == UsernameEntered.Text && squadLogin[i].Item2 != PasswordEntered.Text) 
             {
                 ErrorMessage.Text = "Incorrect password";
+                break;
             }
             else if (squadLogin[i].Item1 == UsernameEntered.Text && squadLogin[i].Item2 == PasswordEntered.Text)
             {

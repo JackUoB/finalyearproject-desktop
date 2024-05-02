@@ -87,7 +87,6 @@
 				<Setter Property="Width" Value="200" />
 				<Setter Property="HorizontalContentAlignment" Value="Center" />
 				<Setter Property="Margin" Value="0,15,0,0" />
-				<Setter Property="Content" Value="Add Player" />
 			</Style>
 			
 			<Style Selector="Button.add:pointerover /template/ ContentPresenter">
@@ -219,24 +218,27 @@
 						</StackPanel>
 					</ScrollViewer>
 				</TabItem>
-				<TabItem Header="Add New Player" Classes="tab">
-					<StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50">
-						<TextBlock Foreground="#d0600f">First Name:</TextBlock>
-						<TextBox Name="FirstName" Width="200"></TextBox>
-						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Surname:</TextBlock>
-						<TextBox Name="LastName" Width="200"></TextBox>
-						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Position:</TextBlock>
-						<ComboBox Name="Position" Width="200">
-							<ComboBoxItem>Goalkeeper</ComboBoxItem>
-							<ComboBoxItem>Defender</ComboBoxItem>
-							<ComboBoxItem>Midfielder</ComboBoxItem>
-							<ComboBoxItem>Forward</ComboBoxItem>
-						</ComboBox>
-						<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Shirt Number:</TextBlock>
-						<NumericUpDown Name="SquadNumber" Width="200" Minimum="1" Maximum="99" FormatString="0" />
-						<Button Name="LoginButton" Classes="add" Click="Button_Click" />
-						<TextBlock Name="ErrorMessage" HorizontalAlignment="Right" FontSize="10" Foreground="#ffffff"></TextBlock>
-					</StackPanel>
+				<TabItem Header="Add New Players" Classes="tab" IsVisible="{Binding IsManagerLoggedIn}">
+						<Grid RowDefinitions="10*,*">
+							<StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50">
+								<TextBlock Foreground="#d0600f">First Name:</TextBlock>
+								<TextBox Name="LeftFirstName" Width="200"></TextBox>
+								<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Surname:</TextBlock>
+								<TextBox Name="LeftLastName" Width="200"></TextBox>
+								<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Position:</TextBlock>
+								<ComboBox Name="LeftPosition" Width="200">
+									<ComboBoxItem>Goalkeeper</ComboBoxItem>
+									<ComboBoxItem>Defender</ComboBoxItem>
+									<ComboBoxItem>Midfielder</ComboBoxItem>
+									<ComboBoxItem>Forward</ComboBoxItem>
+								</ComboBox>
+								<TextBlock Margin="0,5,0,0" Foreground="#d0600f">Shirt Number:</TextBlock>
+								<NumericUpDown Name="LeftSquadNumber" Width="200" Minimum="1" Maximum="99" FormatString="0" />
+								<Button Name="Add" Classes="add" Click="AddButton_Click" Content="Add Player" />
+							</StackPanel>
+							<TextBlock Grid.Row="1" Name="LeftErrorMessage" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10"
+									   Foreground="#ffffff" Margin="10,0,10,0" TextWrapping="Wrap" />
+						</Grid>
 				</TabItem>
 			</TabControl>
 		</DockPanel>
