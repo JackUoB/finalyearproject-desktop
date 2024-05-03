@@ -84,7 +84,7 @@ public partial class SquadPageView : UserControl
                 command.Parameters.AddWithValue("@first_name", LeftFirstName.Text);
                 command.Parameters.AddWithValue("@last_name", LeftLastName.Text);
                 command.Parameters.AddWithValue("@position", LeftPosition.SelectionBoxItem.ToString());
-                command.Parameters.AddWithValue("@username", LeftFirstName.Text[0].ToString().ToLower() + LeftLastName.Text.ToString().ToLower());
+                command.Parameters.AddWithValue("@username", LeftFirstName.Text[0].ToString().ToLower() + LeftLastName.Text.ToString().ToLower().Replace("'","").Replace("-",""));
                 command.Parameters.AddWithValue("@password", "123");
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
