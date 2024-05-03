@@ -5,6 +5,7 @@ using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
+using MySql.Data.MySqlClient;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
@@ -94,7 +95,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void getResultInfo()
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();
@@ -112,7 +113,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
 
             // Take result information from database
             resultInfo = new List<Tuple<int, string, string, int, int, string, string>>();
-            command.CommandText = "SELECT * FROM fixtures WHERE home_score !='' OR away_score !=''";
+            command.CommandText = "SELECT * FROM fixtures WHERE home_score != '' OR away_score != '' ORDER BY `date_and_time` ASC;";
             using (var reader = command.ExecuteReader())
             {
                 resultInfo = new List<Tuple<int, string, string, int, int, string, string>>();
@@ -127,7 +128,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
                         else
                         {
                             resultInfo.Add(new Tuple<int, string, string, int, int, string, string>
-                                (reader.GetInt32(0), reader.GetString(1), reader.GetString(2), Convert.ToInt32(reader.GetString(3)),
+                                (reader.GetInt32(0), Convert.ToString(reader.GetDateTime(1)), reader.GetString(2), Convert.ToInt32(reader.GetString(3)),
                                 Convert.ToInt32(reader.GetString(4)), reader.GetString(5), reader.GetString(6)));
                         }
                     }
@@ -144,7 +145,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void insertLeagueTableInfo(List<Tuple<string, int, int, int, int, int, int>> tableData)
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();
@@ -172,7 +173,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void getLeagueTableInfo()
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();

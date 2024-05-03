@@ -1,18 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FinalYearProjectDesktop.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
 public static class DatabaseInfo
 {
-    static string dbPath = Directory.GetCurrentDirectory().Replace(@"finalyearproject-desktop\bin\Debug\net6.0", @"sqlite\test.db");
-    public static string connString = $"Data Source={dbPath}";
+    //static string dbPath = Directory.GetCurrentDirectory().Replace(@"finalyearproject-desktop\bin\Debug\net6.0", @"sqlite\test.db");
+    static string server = "localhost";
+    static string database = "test";
+    static string username = "root";
+    static string password = "";
+    public static string connString = $"SERVER={server};DATABASE={database};UID={username};PASSWORD={password};";
 }
 
 public static class Login

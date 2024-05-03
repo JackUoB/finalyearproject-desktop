@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Data.Sqlite;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
@@ -43,7 +45,7 @@ public partial class HomePageViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void getMatchInfo()
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();
@@ -61,7 +63,7 @@ public partial class HomePageViewModel : ViewModelBase, INotifyPropertyChanged
                     LastMatchHomeScore = reader.GetString(3);
                     LastMatchAwayScore = reader.GetString(4);
                     LastMatchAwayTeam = reader.GetString(5);
-                    LastMatchInfo = $"Match was played on {DateTime.Parse(reader.GetString(1)).ToString("dd/MM/yy hh:mm:ss").Split()[0]} at {reader.GetString(6)}";
+                    LastMatchInfo = $"Match was played on {reader.GetDateTime(1).ToString("dd/MM/yy hh:mm:ss").Split()[0]} at {reader.GetString(6)}";
                 }
                 reader.Close();
             }
@@ -76,7 +78,7 @@ public partial class HomePageViewModel : ViewModelBase, INotifyPropertyChanged
                 {
                     NextMatchHome = reader.GetString(2);
                     NextMatchAway = reader.GetString(5);
-                    NextMatchInfo = $"Match will be played on {DateTime.Parse(reader.GetString(1)).ToString("dd/MM/yy hh:mm:ss").Split()[0]} at {reader.GetString(6)}";
+                    NextMatchInfo = $"Match will be played on {reader.GetDateTime(1).ToString("dd/MM/yy hh:mm:ss").Split()[0]} at {reader.GetString(6)}";
                 }
                 reader.Close();
             }
@@ -87,7 +89,10 @@ public partial class HomePageViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void getLeagueTableInfo()
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        LeagueTablePageViewModel league = new LeagueTablePageViewModel();
+        league.getLeagueTableInfo();
+
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();

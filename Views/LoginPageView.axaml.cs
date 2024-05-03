@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using FinalYearProjectDesktop.ViewModels;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Data.Sqlite;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace FinalYearProjectDesktop.Views;
 public partial class LoginPageView : UserControl
 {
     int squadSize = 0;
-    List<Tuple<string, string, string>> squadLogin = new List<Tuple<string, string, string>>();
+    List<Tuple<string, string, string, string>> squadLogin = new List<Tuple<string, string, string, string>>();
 
     public LoginPageView()
     {
@@ -34,9 +35,9 @@ public partial class LoginPageView : UserControl
             else if (squadLogin[i].Item1 == UsernameEntered.Text && squadLogin[i].Item2 == PasswordEntered.Text)
             {
                 Login.LoggedIn = true;
-                Login.UserLoggedIn = squadLogin[i].Item3;
+                Login.UserLoggedIn = $"{squadLogin[i].Item3} {squadLogin[i].Item4}";
 
-                if (squadLogin[i].Item3 == "Manager")
+                if (squadLogin[i].Item4 == "Manager")
                 {
                     Login.IsManagerLoggedIn = true;
                 }
@@ -50,7 +51,7 @@ public partial class LoginPageView : UserControl
 
     public void LoginCredentials()
     {
-        using (var connection = new SqliteConnection(DatabaseInfo.connString))
+        using (var connection = new MySqlConnection(DatabaseInfo.connString))
         {
             connection.Open();
             var command = connection.CreateCommand();
@@ -70,7 +71,7 @@ public partial class LoginPageView : UserControl
             command.CommandText = "SELECT * FROM squad ORDER BY squad_number ASC";
             using (var reader = command.ExecuteReader())
             {
-                squadLogin = new List<Tuple<string, string, string>>();
+                squadLogin = new List<Tuple<string, string, string, string>>();
                 for (int i = 0; i < squadSize; i++)
                 {
                     if (reader.Read() != false)
@@ -81,7 +82,7 @@ public partial class LoginPageView : UserControl
                         }
                         else
                         {
-                            squadLogin.Add(new Tuple<string, string, string>(reader.GetString(3), reader.GetString(4), reader.GetString(1)));
+                            squadLogin.Add(new Tuple<string, string, string, string>(reader.GetString(4), reader.GetString(5), reader.GetString(1), reader.GetString(2)));
                         }
                     }
                     else
@@ -92,7 +93,7 @@ public partial class LoginPageView : UserControl
                 reader.Close();
             }
             connection.Close();
-            squadLogin.Add(new Tuple<string, string, string>("Manager", "123", "Manager"));
+            squadLogin.Add(new Tuple<string, string, string, string>("Manager", "123", "The", "Manager"));
         }
     }
 }

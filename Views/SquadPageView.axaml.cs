@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using FinalYearProjectDesktop.ViewModels;
 using Microsoft.Data.Sqlite;
+using MySql.Data.MySqlClient;
 
 namespace FinalYearProjectDesktop.Views;
 
@@ -59,7 +60,7 @@ public partial class SquadPageView : UserControl
             {
                 for (int i = 0; i < squad.PlayerListAll.Count; i++)
                 {
-                    if (LeftSquadNumber.Text == squad.PlayerListAll[i].Number)
+                    if (LeftSquadNumber.Text == squad.PlayerListAll[i].Number.ToString())
                     {
                         LeftErrorMessage.Text = "Number already assigned. Please select a new number";
                         squadNumberCheck = false;
@@ -73,14 +74,15 @@ public partial class SquadPageView : UserControl
         // If all all is valid, add player to squad table
         if (firstNameCheck && lastNameCheck && squadNumberCheck) 
         {
-            using (var connection = new SqliteConnection(DatabaseInfo.connString))
+            using (var connection = new MySqlConnection(DatabaseInfo.connString))
             {
                 connection.Open();
                 var command = connection.CreateCommand();
 
-                command.CommandText = "INSERT INTO squad (squad_number, name, position, username, password) VALUES (@squad_number, @name, @position, @username, @password)";
+                command.CommandText = "INSERT INTO squad (squad_number, first_name, last_name, position, username, password) VALUES (@squad_number, @first_name, @last_name, @position, @username, @password)";
                 command.Parameters.AddWithValue("@squad_number", LeftSquadNumber.Text);
-                command.Parameters.AddWithValue("@name", $"{LeftFirstName.Text} {LeftLastName.Text}");
+                command.Parameters.AddWithValue("@first_name", LeftFirstName.Text);
+                command.Parameters.AddWithValue("@last_name", LeftLastName.Text);
                 command.Parameters.AddWithValue("@position", LeftPosition.SelectionBoxItem.ToString());
                 command.Parameters.AddWithValue("@username", LeftFirstName.Text[0].ToString().ToLower() + LeftLastName.Text.ToString().ToLower());
                 command.Parameters.AddWithValue("@password", "123");
