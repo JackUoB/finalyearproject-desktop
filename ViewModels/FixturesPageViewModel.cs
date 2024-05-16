@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System;
 using System.ComponentModel;
-using DynamicData;
 using System.Collections.ObjectModel;
 using MySql.Data.MySqlClient;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FinalYearProjectDesktop.ViewModels;
 
-public class FixturesPageViewModel : ViewModelBase, INotifyPropertyChanged
+public partial class FixturesPageViewModel : ViewModelBase, INotifyPropertyChanged
 {
+    [ObservableProperty]
+    private bool _isManagerLoggedIn = Login.IsManagerLoggedIn;
+
     public int fixtureCount = 0;
     public int seTigersFixtureCount = 0;
 
@@ -18,6 +21,13 @@ public class FixturesPageViewModel : ViewModelBase, INotifyPropertyChanged
 
     // All SE Tigers fixtures
     public ObservableCollection<Fixture> SETigersFixtures { get; } = new();
+
+    // Fixtures for one week (changes depending on week selected)
+    public ObservableCollection<Fixture> WeekFixtures { get; } = SearchResults.WeekFixtures;
+    private void SearchResults_Searched(object? sender, EventArgs e)
+    {
+        //SearchResults.WeekFixtures;
+    }
 
     /* Set of fixtures for each week.
      * 
@@ -44,7 +54,7 @@ public class FixturesPageViewModel : ViewModelBase, INotifyPropertyChanged
     public ObservableCollection<Fixture> Week17Fixtures { get; } = new();
     public ObservableCollection<Fixture> Week18Fixtures { get; } = new();
 
-    public FixturesPageViewModel()
+    public FixturesPageViewModel() : base()
     {
         getFixtureInfo();
 
@@ -376,5 +386,23 @@ public class Fixture
     public string Score { get; }
     public string AwayTeam { get; }
     public string Venue { get; }
+
+}
+
+public static class SearchResults
+{
+    public static event EventHandler? Searched;
+
+    private static ObservableCollection<Fixture> _weekFixtures = new();
+
+    public static ObservableCollection<Fixture> WeekFixtures
+    {
+        get => _weekFixtures;
+        set
+        {
+            _weekFixtures = value;
+            Searched?.Invoke(null, EventArgs.Empty);
+        }
+    }
 
 }

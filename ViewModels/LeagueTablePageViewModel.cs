@@ -31,7 +31,7 @@ public class LeagueTablePageViewModel : ViewModelBase, INotifyPropertyChanged
             teams[i * 2 + 1] = resultInfo[i].Item6;
         }
 
-        // Data for each team
+        // League data for each team
         for (int i = 0; i < teamCount; i++)
         {
             int played = 0;

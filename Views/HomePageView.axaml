@@ -45,49 +45,41 @@
 
 	<Grid ColumnDefinitions="*,*,*" Background="#555555">
 		<Grid Grid.Column="0" RowDefinitions="*,*">
-			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"
+			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Background="#33aa98b5"
 					CornerRadius="20" Margin="2">
-			</Border>
-			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Background="#aa98b5" Opacity="200"
-					CornerRadius="20" Margin="2">
-			</Border>
-			<Grid RowDefinitions="*,2*,*,2*,*">
-				<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
-						   FontWeight="Bold" Margin="0,30,0,0">PREVIOUS MATCH</TextBlock>
-				<Grid Grid.Row="1" ColumnDefinitions="10*,*">
-					<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-						   FontSize="24" Margin="15,0,20,0" TextWrapping="Wrap" TextAlignment="Left" Text="{Binding LastMatchHomeTeam}" />
-					<TextBlock Grid.Row="1" Classes="text" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-						   FontSize="24" TextWrapping="Wrap" TextAlignment="Right" Text="{Binding LastMatchHomeScore}" />
+				<Grid RowDefinitions="*,2*,*,2*,*">
+					<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
+							   FontWeight="Bold" Margin="0,30,0,0">PREVIOUS MATCH</TextBlock>
+					<Grid Grid.Row="1" ColumnDefinitions="10*,*">
+						<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+							   FontSize="24" Margin="15,0,20,0" TextWrapping="Wrap" TextAlignment="Left" Text="{Binding LastMatchHomeTeam}" />
+						<TextBlock Grid.Row="1" Classes="text" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+							   FontSize="24" TextWrapping="Wrap" TextAlignment="Right" Text="{Binding LastMatchHomeScore}" />
+					</Grid>
+					<Grid Grid.Row="3" ColumnDefinitions="10*,*">
+						<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Left" VerticalAlignment="Top"
+							   FontSize="24" Margin="15,0,20,0" TextWrapping="Wrap" TextAlignment="Left" Text="{Binding LastMatchAwayTeam}" />
+						<TextBlock Grid.Row="1" Classes="text" HorizontalAlignment="Right" VerticalAlignment="Top"
+							   FontSize="24" TextWrapping="Wrap" TextAlignment="Right" Text="{Binding LastMatchAwayScore}" />
+					</Grid>
+					<TextBlock Grid.Row="4" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
+							   FontSize="10" TextWrapping="Wrap" Margin="10,0,10,0" TextAlignment="Center" Text="{Binding LastMatchInfo}"/>
 				</Grid>
-				<Grid Grid.Row="3" ColumnDefinitions="10*,*">
-					<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Left" VerticalAlignment="Top"
-						   FontSize="24" Margin="15,0,20,0" TextWrapping="Wrap" TextAlignment="Left" Text="{Binding LastMatchAwayTeam}" />
-					<TextBlock Grid.Row="1" Classes="text" HorizontalAlignment="Right" VerticalAlignment="Top"
-						   FontSize="24" TextWrapping="Wrap" TextAlignment="Right" Text="{Binding LastMatchAwayScore}" />
-				</Grid>
-				<TextBlock Grid.Row="4" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
-						   FontSize="10" TextWrapping="Wrap" Margin="10,0,10,0" TextAlignment="Center" Text="{Binding LastMatchInfo}"/>
-			</Grid>
-			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
-					CornerRadius="20" Margin="2">
 			</Border>
-			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
+			
+			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="#33d0600f"
 					CornerRadius="20" Margin="2">
+				<WrapPanel Grid.Row="1" ClipToBounds="True" HorizontalAlignment="Center">
+					<Border Classes="Rect" Padding="10"/>
+				</WrapPanel>
 			</Border>
-			<WrapPanel Grid.Row="1" ClipToBounds="True" HorizontalAlignment="Center">
-				<Border Classes="Rect" Padding="10"/>
-			</WrapPanel>
-			<TextBlock Grid.Row="1" Classes="text" FontWeight="Bold"
-				   HorizontalAlignment="Center" VerticalAlignment="Center">VIEW SQUAD</TextBlock>
+			<TextBlock Grid.Row="1" Classes="text" TextWrapping="Wrap" TextAlignment="Center"
+				   HorizontalAlignment="Center" VerticalAlignment="Center">CLICK 'SQUAD' IN THE MENU TO VIEW SQUAD</TextBlock>
 		</Grid>
 		<Grid Grid.Column="1" RowDefinitions="*,*">
-			<Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"
+			<Border Grid.Row="0"  BorderBrush="Black" BorderThickness="1" Background="#3366bb6a"
 					CornerRadius="20" Margin="2">
-			</Border>
-			<Border Grid.Row="0"  BorderBrush="Black" BorderThickness="1" Background="#66bb6a" Opacity="200"
-					CornerRadius="20" Margin="2">
-			</Border>
+			
 			<Grid RowDefinitions="*,2*,*,2*,*">
 				<TextBlock Grid.Row="0" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
 						   FontWeight="Bold" Margin="0,30,0,0">NEXT MATCH</TextBlock>
@@ -100,22 +92,17 @@
 				<TextBlock Grid.Row="4" Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
 						   FontSize="10" TextWrapping="Wrap" Margin="10,0,10,0" TextAlignment="Center" Text="{Binding NextMatchInfo}" />
 			</Grid>
-			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
-					CornerRadius="20" Margin="2">
 			</Border>
-			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#7caffe" Opacity="200"
+			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#337caffe"
 					CornerRadius="20" Margin="2" PointerPressed="Logout_PointerPressed">
-			</Border>
+			
 			<TextBlock Grid.Row="1" Classes="text"
 					   HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" >LOG OUT</TextBlock>
+			</Border>
 		</Grid>
 		<Grid Grid.Column="2">
-			<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
+			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#88ffdd3f"
 					CornerRadius="20" Margin="2">
-			</Border>
-			<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#ffdd3f" Opacity="100"
-					CornerRadius="20" Margin="2">
-			</Border>
 			<ScrollViewer>
 				<StackPanel>
 					<TextBlock Classes="text" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -144,6 +131,7 @@
 					</StackPanel>
 				</StackPanel>
 			</ScrollViewer>
+			</Border>
 		</Grid>
 	</Grid>
 

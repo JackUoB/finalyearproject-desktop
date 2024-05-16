@@ -21,7 +21,7 @@ public static class Login
     public static event EventHandler? OnLogin;
 
     private static bool _loggedIn = false;
-    private static string _userLoggedIn = "user";
+    private static string _userLoggedIn = "user name";
     private static bool _isManagerLoggedIn = false;
 
     public static Boolean LoggedIn
@@ -64,6 +64,9 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     private string _userLoggedIn = Login.UserLoggedIn;
 
     [ObservableProperty]
+    private string _userLoggedInInitial = $"{Login.UserLoggedIn.ToUpper().Split()[0][0]}{Login.UserLoggedIn.ToUpper().Split()[1][0]}";
+
+    [ObservableProperty]
     private bool _isManagerLoggedIn = Login.IsManagerLoggedIn;
 
     [ObservableProperty]
@@ -85,6 +88,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         IsUserLoggedIn = Login.LoggedIn;
         UserLoggedIn = Login.UserLoggedIn;
+        UserLoggedInInitial = $"{Login.UserLoggedIn.ToUpper().Split()[0][0]}{Login.UserLoggedIn.ToUpper().Split()[1][0]}";
 
         if (Login.LoggedIn)
         {
@@ -94,7 +98,11 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         {
             IsPaneOpen = false;
             CurrentPage = new LoginPageViewModel();
-            IsManagerLoggedIn = false;
+
+            if (Login.IsManagerLoggedIn)
+            {
+                IsManagerLoggedIn = false;
+            }
         }
     }
 

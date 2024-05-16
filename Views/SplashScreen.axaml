@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"	
+        xmlns:vm="using:FinalYearProjectDesktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="250"
+		SystemDecorations="None"
+		Topmost="True"
+        x:Class="FinalYearProjectDesktop.Views.SplashScreen"
+		x:DataType="vm:SplashScreenViewModel"
+		Icon="/Assets/tigericon.png"
+		MaxWidth="500" MinWidth="500"
+		MaxHeight="250" MinHeight="250">
+
+	<Window.Styles>
+		<Style Selector="Button.cancel">
+			<Setter Property="Background" Value="#d0600f" />
+			<Setter Property="Foreground" Value="#111111" />
+			<Setter Property="Width" Value="200" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="Content" Value="Cancel" />
+		</Style>
+		<Style Selector="Button.cancel:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="#d0600f" />
+			<Setter Property="Foreground" Value="#111111" />
+			<Setter Property="Opacity" Value="50" />
+		</Style>
+	</Window.Styles>
+
+	<Border BorderBrush="#555555" BorderThickness="2">
+		<Grid RowDefinitions="*,Auto" Background="#555555">
+			<Label Grid.Row="0" Grid.Column="0"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   FontSize="28"
+				   Foreground="#FF8C00"
+				   Content="Launching Application..." />
+			<Grid Grid.Row="1" ColumnDefinitions="*,Auto" Background="#88d0600f">
+				<Label Grid.Column="0" Margin="0,0,0,0"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   Content="{Binding LoadingMessage}">
+				</Label>
+				<Button Grid.Column="1"
+						DockPanel.Dock="Bottom"
+						Classes="cancel"
+						Command="{Binding Cancel}" />
+			</Grid>
+			
+		</Grid>
+	</Border>
+	
+</Window>

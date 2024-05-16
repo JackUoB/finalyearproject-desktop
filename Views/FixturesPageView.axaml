@@ -19,7 +19,7 @@
 		</Style>
 		
 		<Style Selector="TextBlock.fixture">
-			<Setter Property="Padding" Value="2" />
+			<Setter Property="Padding" Value="3" />
 			<Setter Property="VerticalAlignment" Value="Center" />
 			<Setter Property="TextWrapping" Value="Wrap" />
 		</Style>
@@ -37,6 +37,21 @@
 			<Setter Property="Foreground" Value="#ff8c00" />
 			<Setter Property="Opacity" Value="50" />
 		</Style>
+
+		<Style Selector="Button.search">
+			<Setter Property="Background" Value="#d0600f" />
+			<Setter Property="Foreground" Value="#111111" />
+			<Setter Property="Width" Value="200" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="Margin" Value="0,15,0,0" />
+		</Style>
+
+		<Style Selector="Button.search:pointerover /template/ ContentPresenter">
+			<Setter Property="Background" Value="#d0600f" />
+			<Setter Property="Foreground" Value="#111111" />
+			<Setter Property="Opacity" Value="50" />
+		</Style>
+		
 	</UserControl.Styles>
 
 	<DockPanel Background="#555555">
@@ -54,7 +69,7 @@
 								<TextBlock Grid.Column="5" Classes="headings" HorizontalAlignment="Left" Text="Away Team" />
 								<TextBlock Grid.Column="6" Classes="headings" Text="Venue" />
 							</Grid>
-								<ListBox ItemsSource="{Binding SETigersFixtures}" Background="#555555">
+								<ListBox Name="SETF" ItemsSource="{Binding SETigersFixtures}" Background="#555555">
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Fixture}">
 											<StackPanel>
@@ -473,6 +488,95 @@
 									</ListBox.ItemTemplate>
 								</ListBox>
 							</Border>
+						</StackPanel>
+					</ScrollViewer>
+				</TabItem>
+				<TabItem Header="Search" Classes="tab">
+					<ScrollViewer>
+						<StackPanel>
+							<Grid ColumnDefinitions="*,Auto,*" Margin="0,30,0,0">
+								<TextBlock Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+										   Margin="0,0,20,0" Foreground="White">Select Week:</TextBlock>
+								<ComboBox Grid.Column="1" Name="WeekSelect" Width="200" />
+							</Grid>
+							<Button Name="Search" Classes="search" Click="ViewSearch_Click" 
+									Content="Search" HorizontalAlignment="Center" />
+							<TextBlock Name="ErrorMessage" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10"
+									   Foreground="#ffffff" Margin="10,0,10,0" TextWrapping="Wrap" />
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" 
+									   Classes="headings" />
+								<ListBox Name="FilterResult" ItemsSource="{Binding WeekFixtures}" Background="#555555">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type vm:Fixture}">
+											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
+												<TextBlock Grid.Column="0" Classes="fixture" TextAlignment="Right" Text="{Binding Date}" />
+												<TextBlock Grid.Column="1" Classes="fixture" TextAlignment="Center" Text="{Binding Time}" />
+												<TextBlock Grid.Column="2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding HomeTeam}" />
+												<TextBlock Grid.Column="3" Classes="fixture" HorizontalAlignment="Center" Text="{Binding Score}" />
+												<TextBlock Grid.Column="4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="{Binding AwayTeam}" />
+												<TextBlock Grid.Column="5" Classes="fixture" Text="{Binding Venue}" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+						</StackPanel>
+					</ScrollViewer>
+				</TabItem>
+				<TabItem Header="Input Scores" Classes="tab" IsVisible="{Binding IsManagerLoggedIn}">
+					<ScrollViewer>
+						<StackPanel>
+							<Grid ColumnDefinitions="*,Auto,*" Margin="0,30,0,0">
+								<TextBlock Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+										   Margin="0,0,20,0" Foreground="White">Select Week:</TextBlock>
+								<ComboBox Grid.Column="1" Name="InputWeekSelect" Width="200" />
+							</Grid>
+							<Button Name="InputSearch" Classes="search" Click="InputSearch_Click"
+									Content="Search" HorizontalAlignment="Center" />
+							<TextBlock Name="InputErrorMessage" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10"
+									   Foreground="#ffffff" Margin="10,0,10,0" TextWrapping="Wrap" />
+							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center"
+									   Classes="headings" />
+							<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" Name="Results" IsVisible="False">
+								<Grid Grid.Row="0" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
+									<TextBlock Grid.Column="0" Name="home0" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<TextBlock Grid.Column="3" Name="away0" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
+									<TextBlock Grid.Column="4" Name="venue0" Classes="fixture" Text="" />
+								</Grid>
+								<Grid Grid.Row="1" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
+									<TextBlock Grid.Column="0" Name="home1" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<TextBlock Grid.Column="3" Name="away1" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
+									<TextBlock Grid.Column="4" Name="venue1" Classes="fixture" Text="" />
+								</Grid>
+								<Grid Grid.Row="2" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
+									<TextBlock Grid.Column="0" Name="home2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<TextBlock Grid.Column="3" Name="away2" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
+									<TextBlock Grid.Column="4" Name="venue2" Classes="fixture" Text="" />
+								</Grid>
+								<Grid Grid.Row="3" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
+									<TextBlock Grid.Column="0" Name="home3" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<TextBlock Grid.Column="3" Name="away3" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
+									<TextBlock Grid.Column="4" Name="venue3" Classes="fixture" Text="" />
+								</Grid>
+								<Grid Grid.Row="4" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
+									<TextBlock Grid.Column="0" Name="home4" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore4" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore4" HorizontalAlignment="Center" Background="#aad0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<TextBlock Grid.Column="3" Name="away4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
+									<TextBlock Grid.Column="4" Name="venue4" Classes="fixture" Text="" />
+								</Grid>
+							</Grid>
+							<Button Name="InputSave" Classes="search" Click="InputSave_Click" IsVisible="False"
+									Content="Save Changes" HorizontalAlignment="Center" />
+							<TextBlock Name="SaveErrorMessage" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="10"
+									   Foreground="#ffffff" Margin="10" TextWrapping="Wrap" />
 						</StackPanel>
 					</ScrollViewer>
 				</TabItem>

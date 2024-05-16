@@ -41,7 +41,7 @@
 	</Window.Styles>
 
 
-	<Grid RowDefinitions="*,10*,">
+	<Grid RowDefinitions="*,10*">
 		<Grid Grid.Row="0" ColumnDefinitions="*,*,*" Background="#333333">
 			<Button Grid.Column="0"
 					Classes="menu"
@@ -93,11 +93,14 @@
 							   PointerPressed="Logout_PointerPressed">Log out</TextBlock>
 				</Grid>
 				<TextBlock Grid.Column="1"
-						   HorizontalAlignment="Center"
-						   VerticalAlignment="Center"
-						   Foreground="White"
-						   Padding="0,0,10,0"
-					       IsVisible="{Binding IsUserLoggedIn}">Icon</TextBlock>
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Foreground="White"
+					   Padding="0,0,10,0"
+					   FontSize="24"
+					   FontWeight="Bold"
+					   IsVisible="{Binding IsUserLoggedIn}"
+					   Text="{Binding UserLoggedInInitial}"/>
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="1">

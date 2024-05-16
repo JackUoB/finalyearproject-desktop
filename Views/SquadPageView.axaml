@@ -110,16 +110,15 @@
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
-												<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
-														CornerRadius="20" Margin="2" />
-												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
-														CornerRadius="20" Margin="2" />
-												<WrapPanel ClipToBounds="True"
-															HorizontalAlignment="Center">
-													<Viewbox Stretch="Uniform" Height="224">
-														<Border Classes="Shirt ShirtAnimation" MinHeight="224"/>
-													</Viewbox>
-												</WrapPanel>
+												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#33d0600f"
+														CornerRadius="20" Margin="2">
+													<WrapPanel ClipToBounds="True"
+																HorizontalAlignment="Center">
+														<Viewbox Stretch="Uniform" Height="224">
+															<Border Classes="Shirt ShirtAnimation" />
+														</Viewbox>
+													</WrapPanel>
+												</Border>
 												<TextBlock Foreground="Black"
 														   HorizontalAlignment="Center"
 														   VerticalAlignment="Top"
@@ -140,16 +139,15 @@
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
-												<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
-														CornerRadius="20" Margin="2" />
-												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
-														CornerRadius="20" Margin="2" />
+												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#33d0600f"
+														CornerRadius="20" Margin="2">
 												<WrapPanel ClipToBounds="True"
 															HorizontalAlignment="Center">
 													<Viewbox Stretch="Uniform" Height="224">
 														<Border Classes="Shirt ShirtAnimation" />
 													</Viewbox>
 												</WrapPanel>
+												</Border>
 												<TextBlock Foreground="Black"
 														   HorizontalAlignment="Center"
 														   VerticalAlignment="Top"
@@ -170,16 +168,15 @@
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Player}">
 											<Grid ColumnDefinitions="*">
-												<Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
-														CornerRadius="20" Margin="2" />
-												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#d0600f" Opacity="200"
-														CornerRadius="20" Margin="2" />
-												<WrapPanel ClipToBounds="True"
-															HorizontalAlignment="Center">
-													<Viewbox Stretch="Uniform" Height="224">
-														<Border Classes="Shirt ShirtAnimation" />
-													</Viewbox>
-												</WrapPanel>
+												<Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1" Background="#33d0600f"
+														CornerRadius="20" Margin="2">
+													<WrapPanel ClipToBounds="True"
+																HorizontalAlignment="Center">
+														<Viewbox Stretch="Uniform" Height="224">
+															<Border Classes="Shirt ShirtAnimation" />
+														</Viewbox>
+													</WrapPanel>
+												</Border>
 												<TextBlock Foreground="Black"
 														   HorizontalAlignment="Center"
 														   VerticalAlignment="Top"
