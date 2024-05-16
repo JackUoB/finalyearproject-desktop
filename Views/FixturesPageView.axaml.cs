@@ -34,10 +34,12 @@ public partial class FixturesPageView : UserControl, INotifyPropertyChanged
         if (WeekSelect.SelectedItem == null)
         {
             ErrorMessage.Text = "Please select a week";
+            FilterResult.IsVisible = false;
         }
         else
         {
             ErrorMessage.Text = "";
+            FilterResult.IsVisible = true;
             SearchResults.WeekFixtures.Clear();
             switch (fixtureInfo[WeekSelect.SelectedIndex * 5].Item1)
             {

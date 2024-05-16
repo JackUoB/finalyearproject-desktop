@@ -505,7 +505,7 @@
 									   Foreground="#ffffff" Margin="10,0,10,0" TextWrapping="Wrap" />
 							<TextBlock FontWeight="Bold" Margin="0,15,0,0" HorizontalAlignment="Center" 
 									   Classes="headings" />
-								<ListBox Name="FilterResult" ItemsSource="{Binding WeekFixtures}" Background="#555555">
+								<ListBox Name="FilterResult" ItemsSource="{Binding WeekFixtures}" Background="#555555" IsVisible="False">
 									<ListBox.ItemTemplate>
 										<DataTemplate DataType="{x:Type vm:Fixture}">
 											<Grid Grid.Column="0" ColumnDefinitions="3*,2*,6*,4*,6*,6*" Margin="8">
