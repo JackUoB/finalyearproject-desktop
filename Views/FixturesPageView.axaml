@@ -539,36 +539,36 @@
 							<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" Name="Results" IsVisible="False">
 								<Grid Grid.Row="0" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
 									<TextBlock Grid.Column="0" Name="home0" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
-									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
-									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0"/>
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore0" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
 									<TextBlock Grid.Column="3" Name="away0" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
 									<TextBlock Grid.Column="4" Name="venue0" Classes="fixture" Text="" />
 								</Grid>
 								<Grid Grid.Row="1" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
 									<TextBlock Grid.Column="0" Name="home1" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
-									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
-									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore1" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
 									<TextBlock Grid.Column="3" Name="away1" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
 									<TextBlock Grid.Column="4" Name="venue1" Classes="fixture" Text="" />
 								</Grid>
 								<Grid Grid.Row="2" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
 									<TextBlock Grid.Column="0" Name="home2" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
-									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
-									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False" Name="awayScore2" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
 									<TextBlock Grid.Column="3" Name="away2" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
 									<TextBlock Grid.Column="4" Name="venue2" Classes="fixture" Text="" />
 								</Grid>
 								<Grid Grid.Row="3" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
 									<TextBlock Grid.Column="0" Name="home3" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
-									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
-									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore3" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
 									<TextBlock Grid.Column="3" Name="away3" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
 									<TextBlock Grid.Column="4" Name="venue3" Classes="fixture" Text="" />
 								</Grid>
 								<Grid Grid.Row="4" ColumnDefinitions="6*,3*,3*,6*,4*" Margin="8">
 									<TextBlock Grid.Column="0" Name="home4" Classes="fixture" TextAlignment="Right" HorizontalAlignment="Right" FontWeight="Bold" Text="" />
-									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore4" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
-									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore4" HorizontalAlignment="Center" Background="#aad0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" />
+									<NumericUpDown Grid.Column="1" ShowButtonSpinner="False" Name="homeScore4" HorizontalAlignment="Center" Background="#88d0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
+									<NumericUpDown Grid.Column="2" ShowButtonSpinner="False"  Name="awayScore4" HorizontalAlignment="Center" Background="#aad0600f" VerticalContentAlignment="Center" Text="" Minimum="0" Maximum="999" FormatString="0" />
 									<TextBlock Grid.Column="3" Name="away4" Classes="fixture" TextAlignment="Left" HorizontalAlignment="Left" FontWeight="Bold" Text="" />
 									<TextBlock Grid.Column="4" Name="venue4" Classes="fixture" Text="" />
 								</Grid>
